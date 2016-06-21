@@ -1,9 +1,10 @@
 package com.yozoe.androidnote;
 
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
+import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.yozoe.an_common.BaseActivity;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
