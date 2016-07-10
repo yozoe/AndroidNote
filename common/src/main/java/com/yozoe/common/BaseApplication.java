@@ -1,4 +1,4 @@
-package com.yozoe.an_common;
+package com.yozoe.common;
 
 import android.app.Application;
 
