@@ -13,7 +13,7 @@ public class CircleBrush implements IBrush {
 
     @Override
     public void move(Path path, float x, float y) {
-
+        path.addCircle(x, y, 10, Path.Direction.CW);
     }
 
     @Override

@@ -18,12 +18,16 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:id="@+id/ac_draw_operate_undo_btn"
+            android:text="undo"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:id="@+id/ac_draw_operate_redo_btn"
+            android:text="redo"/>
 
     </LinearLayout>
 
