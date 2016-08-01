@@ -10,6 +10,10 @@
             倒数第二位:更新部分功能
             第一位:项目重大更新(代码重构,大部分功能添加,界面整体改动) -->
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.HomeActivity" />
     </application>
 
 </manifest>
