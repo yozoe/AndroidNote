@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,13 +19,12 @@ import android.widget.Toast;
 import com.example.mobilesafe.R;
 import com.example.mobilesafe.util.StreamUtil;
 import com.example.mobilesafe.util.ToastUtil;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,6 +105,14 @@ public class SplashActivity extends Activity {
                 enterHome();
             }
         });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                //即使用户点了取消也进入应用程序主界面
+                enterHome();
+                dialogInterface.dismiss();
+            }
+        });
         builder.show();
     }
 
@@ -116,39 +124,88 @@ public class SplashActivity extends Activity {
             //2.获取sd路径
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "mobilesafe74.apk";
             //3.发送请求,获取apk,并且放置到指定路径
-            HttpUtils httpUtils = new HttpUtils();
             //4.发送请求,传递参数(下载地址,下载应用位置)
-            httpUtils.download(mDownloadUrl, path, new RequestCallBack<File>() {
+            RequestParams params = new RequestParams(mDownloadUrl);
+            x.http().get(params, new Callback.ProgressCallback<File>() {
                 @Override
-                public void onSuccess(ResponseInfo<File> responseInfo) {
+                public void onWaiting() {
+                    Log.i("hehe", "on waiting");
+                }
+
+                @Override
+                public void onStarted() {
+                    Log.i("hehe", "on started");
+                }
+
+                @Override
+                public void onLoading(long total, long current, boolean isDownloading) {
+                    Log.i("hehe", "current = " + current);
+                }
+
+                @Override
+                public void onSuccess(File result) {
                     //下载成功(下载过后的放置在sd卡中的apk)
                     Log.i("hehe", "下载成功");
-                    File file = responseInfo.result;
+//                    File file = responseInfo.result;
+                    File file = result;
+                    //提示用户安装
+                    installApk(file);
                 }
 
                 @Override
-                public void onFailure(HttpException e, String s) {
-                    //下载失败
-                    Log.i("hehe", "下载失败");
+                public void onError(Throwable ex, boolean isOnCallback) {
+//                    Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
-                //刚刚开始下载
                 @Override
-                public void onStart() {
-                    Log.i("hehe", "刚刚开始下载");
-                    super.onStart();
+                public void onCancelled(CancelledException cex) {
+//                    Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
                 }
 
-                //下载过程中的方法(下载apk总大小,当前的下载位置,是否正在下载)
                 @Override
-                public void onLoading(long total, long current, boolean isUploading) {
-                    Log.i("hehe", "下载中......");
-                    Log.i("hehe", "total = " + total);
-                    Log.i("hehe", "current = " + current);
-                    super.onLoading(total, current, isUploading);
+                public void onFinished() {
+                    Log.i("hehe", "finished");
                 }
+
             });
         }
+    }
+
+    /**
+     * 安装对应apk
+     * @param file 安装文件
+     */
+    private void installApk(File file) {
+
+        //版本1从android studio上运行的引用,使用的是bin目录下的应用,使用~/.android/debug.keystore
+        //版本2单独打包生成的是签名文件是mobilesafe.jks
+        //所以用mobilesafe.jks打两个版本的包
+        //用adb install *.apk安装第一个版本
+        //将第二个版本上传到服务器 再更新即可
+        //包名一直签名不一致安装失败
+        //签名一直包名不一直生成两个应用
+
+        //系统应用界面,源码,安装apk入口
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        //文件作为数据源
+//        intent.setData(Uri.fromFile(file));
+//        intent.setType("application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    /**
+     * 开一个activity后返回结果调用的
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        enterHome();
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
