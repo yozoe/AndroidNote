@@ -13,10 +13,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mobilesafe.R;
+import com.example.mobilesafe.util.ConstantValue;
+import com.example.mobilesafe.util.SpUtil;
 import com.example.mobilesafe.util.StreamUtil;
 import com.example.mobilesafe.util.ToastUtil;
 
@@ -83,6 +88,7 @@ public class SplashActivity extends Activity {
     };
     private String mVersionDes;
     private String mDownloadUrl;
+    private RelativeLayout rl_root;
 
     private void showUpdateDialog() {
         //对话框是依赖于activity存在的
@@ -234,6 +240,16 @@ public class SplashActivity extends Activity {
         initUI();
         //初始化数据
         initData();
+        initAnimation();
+    }
+
+    /**
+     * 添加淡入淡出动画
+     */
+    private void initAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(3000);
+        rl_root.setAnimation(alphaAnimation);
     }
 
     /**
@@ -255,7 +271,14 @@ public class SplashActivity extends Activity {
          * 新版本apk下载地址
          */
 
-        checkVersion();
+        if (SpUtil.getBoolean(this, ConstantValue.OPEN_UPDATE, false)) {
+            checkVersion();
+        }
+        else {
+//            mHandler.sendMessageDelayed(msg, 4000);
+            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
+        }
+
     }
 
     /**
@@ -352,6 +375,7 @@ public class SplashActivity extends Activity {
      */
     private void initUI() {
         tv_version_name = (TextView) findViewById(R.id.tv_version_name);
+        rl_root = (RelativeLayout) findViewById(R.id.rl_root);
     }
 
     /**
