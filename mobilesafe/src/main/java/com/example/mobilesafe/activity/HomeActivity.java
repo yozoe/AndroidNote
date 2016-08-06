@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.mobilesafe.R;
 import com.example.mobilesafe.util.ConstantValue;
+import com.example.mobilesafe.util.Md5Util;
 import com.example.mobilesafe.util.SpUtil;
 import com.example.mobilesafe.util.ToastUtil;
 
@@ -81,13 +82,15 @@ public class HomeActivity extends Activity {
     }
 
     /**
-     * 设置密码对话框
+     * 确认密码对话框
      */
     private void showConfirmPsdDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
         final View view = View.inflate(this, R.layout.dialog_confirm_psd, null);
-        dialog.setView(view);
+//        dialog.setView(view);
+        //为了兼容低版本,给对话框设置布局时候,让其没有内间距
+        dialog.setView(view, 0, 0, 0, 0);
         dialog.show();
 
         Button bt_submit = (Button) view.findViewById(R.id.bt_submit);
@@ -98,11 +101,13 @@ public class HomeActivity extends Activity {
             public void onClick(View v) {
                 EditText et_confirm_psd = (EditText) view.findViewById(R.id.et_confirm_psd);
 
-                String confimPsd = et_confirm_psd.getText().toString();
+                String confirmPsd = et_confirm_psd.getText().toString();
 
-                if (!TextUtils.isEmpty(confimPsd)) {
-                    if (SpUtil.getString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, "").equals(confimPsd)) {
-                        Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+                if (!TextUtils.isEmpty(confirmPsd)) {
+                    String psd = SpUtil.getString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, "");
+                    if (psd.equals( Md5Util.encoder(confirmPsd)
+                    )) {
+                        Intent intent = new Intent(getApplicationContext(), SetupOverActivity.class);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -110,8 +115,9 @@ public class HomeActivity extends Activity {
                         ToastUtil.show(getApplicationContext(), "确认密码错误");
                     }
                 }
-
-                ToastUtil.show(getApplicationContext(), "请输入密码");
+                else {
+                    ToastUtil.show(getApplicationContext(), "请输入密码");
+                }
             }
         });
 
@@ -124,7 +130,7 @@ public class HomeActivity extends Activity {
     }
 
     /**
-     * 确认密码对话框
+     * 设置密码对话框
      */
     private void showSetPsdDialog() {
         //自己定义对话框的展示样式,所以需要调用dialog.setView(view);
@@ -132,7 +138,8 @@ public class HomeActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
         final View view = View.inflate(this, R.layout.dialog_set_psd, null);
-        dialog.setView(view);
+//        dialog.setView(view);
+        dialog.setView(view, 0, 0, 0, 0);
         dialog.show();
 
         Button bt_submit = (Button) view.findViewById(R.id.bt_submit);
@@ -149,15 +156,18 @@ public class HomeActivity extends Activity {
 
                 if (!TextUtils.isEmpty(psd) && !TextUtils.isEmpty(confimPsd)) {
                     if (psd.equals(confimPsd)) {
+                        Intent intent = new Intent(getApplicationContext(), SetupOverActivity.class);
+                        startActivity(intent);
                         dialog.dismiss();
-                        SpUtil.putString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, psd);
+                        SpUtil.putString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD, Md5Util.encoder(psd));
                     }
                     else {
                         ToastUtil.show(getApplicationContext(), "确认密码错误");
                     }
                 }
-
-                ToastUtil.show(getApplicationContext(), "请输入密码");
+                else {
+                    ToastUtil.show(getApplicationContext(), "请输入密码");
+                }
             }
         });
 
