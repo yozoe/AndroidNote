@@ -67,7 +67,7 @@ public class Setup2Activity extends Activity {
     }
 
     public void nextPage(View view) {
-        String serialNumber =  SpUtil.getString(this.getString(this, ConstantValue.SIM_NUMBERE, ""));
+        String serialNumber =  SpUtil.getString(this, ConstantValue.SIM_NUMBERE, "");
         if (!TextUtils.isEmpty(serialNumber)) {
             Intent intent = new Intent(getApplication(), Setup3Activity.class);
             startActivity(intent);
