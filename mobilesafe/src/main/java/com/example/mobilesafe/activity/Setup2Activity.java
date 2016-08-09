@@ -67,15 +67,21 @@ public class Setup2Activity extends Activity {
     }
 
     public void nextPage(View view) {
-        String serialNumber =  SpUtil.getString(this, ConstantValue.SIM_NUMBERE, "");
-        if (!TextUtils.isEmpty(serialNumber)) {
-            Intent intent = new Intent(getApplication(), Setup3Activity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            ToastUtil.show(this, "请绑定sim卡");
-        }
+
+        Intent intent = new Intent(getApplication(), Setup3Activity.class);
+        startActivity(intent);
+        finish();
+
+//        先跳过绑定sim卡
+//        String serialNumber =  SpUtil.getString(this, ConstantValue.SIM_NUMBERE, "");
+//        if (!TextUtils.isEmpty(serialNumber)) {
+//            Intent intent = new Intent(getApplication(), Setup3Activity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//        else {
+//            ToastUtil.show(this, "请绑定sim卡");
+//        }
 
     }
 

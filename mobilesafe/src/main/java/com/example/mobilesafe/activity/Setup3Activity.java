@@ -39,6 +39,12 @@ public class Setup3Activity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //讲特殊字符过滤
+        if (data != null) {
+            String phone = data.getStringExtra("phone");
+            phone = phone.replace("-", "").replace(" ", "").trim();
+            et_phone_number.setText(phone);
+        }
     }
 
     public void nextPage(View view) {
