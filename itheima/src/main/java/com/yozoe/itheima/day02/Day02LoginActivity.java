@@ -2,11 +2,10 @@ package com.yozoe.itheima.day02;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
+import android.text.format.Formatter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -86,7 +85,17 @@ public class Day02LoginActivity extends Activity implements View.OnClickListener
             }
 
             //判断sdcard存储空间是否满足文件的存储
-//            new File("").getUsableSpace()
+
+            File sdcard_filedir = Environment.getExternalStorageDirectory();//得到sdcard的目录作为一个文件对象
+            long usablesSpace = sdcard_filedir.getUsableSpace();//获取文件目录对象剩余空间
+            long totalSpace = sdcard_filedir.getTotalSpace();
+
+            String usableSpace_str = Formatter.formatFileSize(mContext, usablesSpace);
+            String totalSpace_str = Formatter.formatFileSize(mContext, totalSpace);
+
+            if (usablesSpace < 1024 * 1024 * 200) {//判断剩余空间是否小于200M
+                Toast.makeText(mContext, "sdcard剩余空间不足,无法满足下载,剩余空间为" + usableSpace_str, Toast.LENGTH_SHORT).show();
+            }
 
             if (result) {
                 Toast.makeText(mContext, "用户名密码保存成功", Toast.LENGTH_SHORT).show();
@@ -101,3 +110,8 @@ public class Day02LoginActivity extends Activity implements View.OnClickListener
     }
 
 }
+
+/*
+/data/data/: context.getFileDir().getPath() 是一个应用程序的私有目录,只有当前应用程序有权限访问读写,安全性要求比较高的数据,size比较小的
+/sdcard: Environment.getExternalStorageDirectory() 是一个外部存储目录,声明权限就可以访问,存放安全性不高的数据,size比较大的
+ */
