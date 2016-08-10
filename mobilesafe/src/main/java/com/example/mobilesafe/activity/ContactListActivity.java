@@ -173,7 +173,7 @@ public class ContactListActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == 0){
-            if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (permissions[0].equals(Manifest.permission.READ_CONTACTS)
                     &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 // 用户同意
                 initData();
@@ -183,6 +183,7 @@ public class ContactListActivity extends Activity {
 //                    showPermissionDialog();
 //                    return;
 //                }
+
             }
         }
     }

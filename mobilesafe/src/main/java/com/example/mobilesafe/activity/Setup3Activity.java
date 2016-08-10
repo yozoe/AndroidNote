@@ -30,6 +30,8 @@ public class Setup3Activity extends Activity {
 
     private void initUI() {
         et_phone_number = (EditText) findViewById(R.id.et_phone_number);
+        String phone = SpUtil.getString(this, ConstantValue.CONTACT_PHONE, "");
+        et_phone_number.setText(phone);
         bt_select_number = (Button) findViewById(R.id.bt_select_number);
         bt_select_number.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,7 @@ public class Setup3Activity extends Activity {
             finish();
 
             //如果现在是输入电话号码,则需要去保存
+            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
         }
         else {
             ToastUtil.show(this, "请输入电话号码");
@@ -75,5 +78,6 @@ public class Setup3Activity extends Activity {
         Intent intent = new Intent(getApplication(), Setup2Activity.class);
         startActivity(intent);
         finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }

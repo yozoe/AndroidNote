@@ -276,7 +276,7 @@ public class SplashActivity extends Activity {
         }
         else {
 //            mHandler.sendMessageDelayed(msg, 4000);
-            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
+            mHandler.sendEmptyMessageDelayed(ENTER_HOME, 2000);
         }
 
     }

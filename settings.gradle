@@ -1,1 +1,1 @@
-include ':app', ':volley', ':pattern', ':itheima', ':common', ':remoteservice', ':mobilesafe', ':myworld'
+include ':app', ':volley', ':pattern', ':itheima', ':common', ':remoteservice', ':mobilesafe', ':myworld', ':test'
