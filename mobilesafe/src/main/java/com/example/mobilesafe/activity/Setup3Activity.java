@@ -3,11 +3,15 @@ package com.example.mobilesafe.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mobilesafe.R;
+import com.example.mobilesafe.util.ConstantValue;
+import com.example.mobilesafe.util.SpUtil;
+import com.example.mobilesafe.util.ToastUtil;
 
 /**
  * Created by wangdong on 16/8/7.
@@ -44,13 +48,27 @@ public class Setup3Activity extends Activity {
             String phone = data.getStringExtra("phone");
             phone = phone.replace("-", "").replace(" ", "").trim();
             et_phone_number.setText(phone);
+            //存储联系人至sp中
+            SpUtil.putString(getApplicationContext(), ConstantValue.CONTACT_PHONE, phone);
         }
     }
 
     public void nextPage(View view) {
-        Intent intent = new Intent(getApplication(), Setup4Activity.class);
-        startActivity(intent);
-        finish();
+        //点击按钮以后,需要获取输入框中的联系人,再做下一步操作
+        String phone = et_phone_number.getText().toString();
+
+        //在sp存储了相关联系人以后才可以跳转到下一个界面
+//        String contact_phone = SpUtil.getString(getApplicationContext(), ConstantValue.CONTACT_PHONE, "");
+        if (!TextUtils.isEmpty(phone)) {
+            Intent intent = new Intent(getApplication(), Setup4Activity.class);
+            startActivity(intent);
+            finish();
+
+            //如果现在是输入电话号码,则需要去保存
+        }
+        else {
+            ToastUtil.show(this, "请输入电话号码");
+        }
     }
 
     public void prePage(View view) {
