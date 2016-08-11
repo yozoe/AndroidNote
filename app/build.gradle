@@ -25,5 +25,5 @@ dependencies {
     compile project(':volley')
     compile project(':pattern')
     compile project(':common')
-    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:appcompat-v7:23.+'
 }

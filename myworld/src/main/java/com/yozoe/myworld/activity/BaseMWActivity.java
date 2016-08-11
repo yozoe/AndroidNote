@@ -1,5 +1,7 @@
 package com.yozoe.myworld.activity;
 
+import android.view.View;
+
 /**
  * Created by wangdong on 16/8/8.
  */
@@ -24,4 +26,5 @@ public class BaseMWActivity extends BaseActivity {
     protected void initData() {
 
     }
+
 }
