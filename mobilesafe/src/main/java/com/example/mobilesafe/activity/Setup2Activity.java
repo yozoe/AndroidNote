@@ -17,7 +17,7 @@ import com.example.mobilesafe.view.SettingItemVIew;
 /**
  * Created by wangdong on 16/8/7.
  */
-public class Setup2Activity extends Activity {
+public class Setup2Activity extends BaseSetupActivity {
     private SettingItemVIew siv_sim_bound;
 
     @Override
@@ -66,8 +66,8 @@ public class Setup2Activity extends Activity {
         });
     }
 
-    public void nextPage(View view) {
-
+    @Override
+    protected void showNextPage() {
         Intent intent = new Intent(getApplication(), Setup3Activity.class);
         startActivity(intent);
         finish();
@@ -85,7 +85,8 @@ public class Setup2Activity extends Activity {
         overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
     }
 
-    public void prePage(View view) {
+    @Override
+    protected void showPrePage() {
         Intent intent = new Intent(getApplication(), Setup1Activity.class);
         startActivity(intent);
         finish();

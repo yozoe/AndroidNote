@@ -12,13 +12,14 @@ import com.example.mobilesafe.R;
 /**
  * Created by wangdong on 16/8/11.
  */
-public class BaseSetupActivity extends Activity {
+public abstract class BaseSetupActivity extends Activity {
     private GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //2.创建手势管理对象,用作管理在onTouchEvent(event)传递过来的手势动作
         gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
             @Override

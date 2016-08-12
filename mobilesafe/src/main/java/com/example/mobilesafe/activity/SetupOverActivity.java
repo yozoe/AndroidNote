@@ -3,6 +3,8 @@ package com.example.mobilesafe.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.mobilesafe.R;
 import com.example.mobilesafe.util.ConstantValue;
@@ -12,6 +14,9 @@ import com.example.mobilesafe.util.SpUtil;
  * Created by wangdong on 16/8/6.
  */
 public class SetupOverActivity extends Activity {
+    private TextView tv_reset_setup;
+    private TextView tv_phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +26,7 @@ public class SetupOverActivity extends Activity {
 
         if (setup_over) {
             setContentView(R.layout.activity_setup_over);
+            initUI();
         }
         else {
             Intent intent = new Intent(this, Setup1Activity.class);
@@ -28,4 +34,16 @@ public class SetupOverActivity extends Activity {
             finish();
         }
     }
+
+    private void initUI() {
+        tv_phone = (TextView) findViewById(R.id.tv_phone);
+        tv_reset_setup = (TextView) findViewById(R.id.tv_reset_setup);
+        tv_reset_setup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
 }

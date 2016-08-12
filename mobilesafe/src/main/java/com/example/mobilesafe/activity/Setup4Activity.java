@@ -15,7 +15,7 @@ import com.example.mobilesafe.util.ToastUtil;
 /**
  * Created by wangdong on 16/8/7.
  */
-public class Setup4Activity extends Activity {
+public class Setup4Activity extends BaseSetupActivity {
     private CheckBox cb_box;
 
     @Override
@@ -26,6 +26,29 @@ public class Setup4Activity extends Activity {
         initUI();
 
         SpUtil.getBoolean(this, ConstantValue.OPEN_SECURITY, false);
+    }
+
+    @Override
+    protected void showNextPage() {
+        boolean open_security = SpUtil.getBoolean(this, ConstantValue.OPEN_SECURITY, false);
+        if (open_security) {
+            Intent intent = new Intent(getApplication(), SetupOverActivity.class);
+            startActivity(intent);
+            finish();
+            SpUtil.putBoolean(this, ConstantValue.SETUP_OVER, true);
+            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        }
+        else {
+            ToastUtil.show(getApplicationContext(), "请开启防盗保护");
+        }
+    }
+
+    @Override
+    protected void showPrePage() {
+        Intent intent = new Intent(getApplication(), Setup3Activity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     private void initUI() {
@@ -54,24 +77,4 @@ public class Setup4Activity extends Activity {
 
     }
 
-    public void nextPage(View view) {
-        boolean open_security = SpUtil.getBoolean(this, ConstantValue.OPEN_SECURITY, false);
-        if (open_security) {
-            Intent intent = new Intent(getApplication(), SetupOverActivity.class);
-            startActivity(intent);
-            finish();
-            SpUtil.putBoolean(this, ConstantValue.SETUP_OVER, true);
-            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-        }
-        else {
-            ToastUtil.show(getApplicationContext(), "请开启防盗保护");
-        }
-    }
-
-    public void prePage(View view) {
-        Intent intent = new Intent(getApplication(), Setup3Activity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
-    }
 }
