@@ -24,13 +24,13 @@ public class MyWorldActivity extends BaseMWActivity {
     ThirdFragment mThirdFragment;
     FourthFragment mFourthFragment;
 
-    public static final int MENU_FIRST = 0x0000;
+    public static final int TABBAR_FIRST = 0x0000;
 
-    public static final int MENU_SECOND = 0x0001;
+    public static final int TABBAR_SECOND = 0x0001;
 
-    public static final int MENU_THIRD = 0x0002;
+    public static final int TABBAR_THIRD = 0x0002;
 
-    public static final int MENU_FOURTH = 0x0003;
+    public static final int TABBAR_FOURTH = 0x0003;
 
     private Map<Integer, BaseFragment> mFragments;
 
@@ -41,6 +41,11 @@ public class MyWorldActivity extends BaseMWActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_world);
 
+        choseMenu();
+    }
+
+    private void choseMenu() {
+        selectedTabbar(TABBAR_FIRST);
     }
 
     @Override
@@ -54,10 +59,10 @@ public class MyWorldActivity extends BaseMWActivity {
         mSecondFragment = new SecondFragment();
         mThirdFragment = new ThirdFragment();
         mFourthFragment = new FourthFragment();
-        mFragments.put(MENU_FIRST, mFirstFragment);
-        mFragments.put(MENU_SECOND, mSecondFragment);
-        mFragments.put(MENU_THIRD, mThirdFragment);
-        mFragments.put(MENU_FOURTH, mFourthFragment);
+        mFragments.put(TABBAR_FIRST, mFirstFragment);
+        mFragments.put(TABBAR_SECOND, mSecondFragment);
+        mFragments.put(TABBAR_THIRD, mThirdFragment);
+        mFragments.put(TABBAR_FOURTH, mFourthFragment);
     }
 
     @Override
@@ -73,18 +78,22 @@ public class MyWorldActivity extends BaseMWActivity {
 
     public void onFirstTabClick(View v) {
         l("first");
+        selectedTabbar(TABBAR_FIRST);
     }
 
     public void onSecondTabClick(View v) {
         l("second");
+        selectedTabbar(TABBAR_SECOND);
     }
 
     public void onThirdTabClick(View v) {
         l("third");
+        selectedTabbar(TABBAR_THIRD);
     }
 
     public void onFourthTabClick(View v) {
         l("fourth");
+        selectedTabbar(TABBAR_FOURTH);
     }
 
     private void selectedTabbar(int tabbar) {
@@ -110,5 +119,6 @@ public class MyWorldActivity extends BaseMWActivity {
                 ft.hide(fragment);
             }
         }
+        ft.commitAllowingStateLoss();
     }
 }
