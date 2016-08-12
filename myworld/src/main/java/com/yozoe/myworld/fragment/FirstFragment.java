@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,30 +14,22 @@ import com.yozoe.myworld.MyWorldApplication;
 import com.yozoe.myworld.R;
 import com.yozoe.myworld.entity.HomeConfigEntity;
 import com.yozoe.myworld.util.FileUtil;
+import com.yozoe.myworld.view.FixScrollView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by wangdong on 16/8/8.
  */
 public class FirstFragment extends BaseFragment {
 
+    private FixScrollView mFixScrollView;
+    private LinearLayout mLayoutHomeConfig;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            String homeCfgContent = FileUtil.getContent(MyWorldApplication.getContext().getResources().getAssets().open("homeconfig"));
-
-            HomeConfigEntity homeConfigEntity = new Gson().fromJson(homeCfgContent, new TypeToken<HomeConfigEntity>(){}.getType());
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -44,10 +37,32 @@ public class FirstFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_first, null);
+        mFixScrollView = (FixScrollView) view.findViewById(R.id.sv_content);
+        mLayoutHomeConfig = (LinearLayout) view.findViewById(R.id.layout_home_config);
         return view;
     }
 
     public HomeConfigEntity getHomeConfig() {
         return null;
+    }
+
+    private void initModules(int type) {
+        mLayoutHomeConfig.removeAllViews();
+        mFixScrollView.scrollTo(0, 0);
+        try {
+            String homeCfgContent = FileUtil.getContent(MyWorldApplication.getContext().getResources().getAssets().open("homeconfig"));
+            HomeConfigEntity homeConfigEntity = new Gson().fromJson(homeCfgContent, new TypeToken<HomeConfigEntity>(){}.getType());
+
+            for (HomeConfigEntity.HomeConfigModule module : homeConfigEntity.getModules()) {
+                if (module.getModuleType().equals(HomeConfigEntity.HomeConfigModule.MODULE_BLOCKS)) {
+
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

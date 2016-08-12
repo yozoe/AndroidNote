@@ -14,6 +14,14 @@ public class HomeConfigEntity implements Serializable {
     private static final long serialVersionUID = -5359447643615773456L;
     private List<HomeConfigModule> modules;
 
+    public List<HomeConfigModule> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<HomeConfigModule> modules) {
+        this.modules = modules;
+    }
+
     public static class HomeConfigModule implements Serializable {
 
         private static final long serialVersionUID = -7907094370391188156L;
