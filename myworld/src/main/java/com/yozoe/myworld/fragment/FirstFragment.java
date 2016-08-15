@@ -15,6 +15,7 @@ import com.yozoe.myworld.R;
 import com.yozoe.myworld.entity.HomeConfigEntity;
 import com.yozoe.myworld.util.FileUtil;
 import com.yozoe.myworld.view.FixScrollView;
+import com.yozoe.myworld.view.HomeBlocksLayout;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,16 +31,27 @@ public class FirstFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.i("hehe", "first fragment onCreate");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i("hehe", "first fragment onCreateView");
         View view = inflater.inflate(R.layout.fragment_first, null);
         mFixScrollView = (FixScrollView) view.findViewById(R.id.sv_content);
         mLayoutHomeConfig = (LinearLayout) view.findViewById(R.id.layout_home_config);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+    private void initData() {
+        initModules(0);
     }
 
     public HomeConfigEntity getHomeConfig() {
@@ -55,7 +67,9 @@ public class FirstFragment extends BaseFragment {
 
             for (HomeConfigEntity.HomeConfigModule module : homeConfigEntity.getModules()) {
                 if (module.getModuleType().equals(HomeConfigEntity.HomeConfigModule.MODULE_BLOCKS)) {
-
+                    HomeBlocksLayout blocksLayout = new HomeBlocksLayout(mContext);
+                    blocksLayout.setModule(module);
+                    mLayoutHomeConfig.addView(blocksLayout);
                 }
             }
 

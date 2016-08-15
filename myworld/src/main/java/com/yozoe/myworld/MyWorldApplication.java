@@ -17,5 +17,7 @@ public class MyWorldApplication extends BaseApplication {
         mApplication = this;
     }
 
-
+    public static BaseApplication getContext() {
+        return mApplication;
+    }
 }
