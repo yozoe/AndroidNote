@@ -37,11 +37,17 @@ public class SetupOverActivity extends Activity {
 
     private void initUI() {
         tv_phone = (TextView) findViewById(R.id.tv_phone);
+
+        String phone = SpUtil.getString(this, ConstantValue.CONTACT_PHONE, "");
+        tv_phone.setText(phone);
+
         tv_reset_setup = (TextView) findViewById(R.id.tv_reset_setup);
         tv_reset_setup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
