@@ -12,6 +12,7 @@ import com.yozoe.myworld.fragment.FirstFragment;
 import com.yozoe.myworld.fragment.FourthFragment;
 import com.yozoe.myworld.fragment.SecondFragment;
 import com.yozoe.myworld.fragment.ThirdFragment;
+import com.yozoe.myworld.view.TabbarItemLayout;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,18 +20,20 @@ import java.util.Map;
 
 public class MyWorldActivity extends BaseMWActivity {
 
-    FirstFragment mFirstFragment;
-    SecondFragment mSecondFragment;
-    ThirdFragment mThirdFragment;
-    FourthFragment mFourthFragment;
+    private FirstFragment mFirstFragment;
+    private SecondFragment mSecondFragment;
+    private ThirdFragment mThirdFragment;
+    private FourthFragment mFourthFragment;
 
     public static final int TABBAR_FIRST = 0x0000;
-
     public static final int TABBAR_SECOND = 0x0001;
-
     public static final int TABBAR_THIRD = 0x0002;
-
     public static final int TABBAR_FOURTH = 0x0003;
+
+    private TabbarItemLayout mFirsetTabbar;
+    private TabbarItemLayout mSecondTabbar;
+    private TabbarItemLayout mThirdTabbar;
+    private TabbarItemLayout mFourthTabbar;
 
     private Map<Integer, BaseFragment> mFragments;
 
@@ -72,9 +75,11 @@ public class MyWorldActivity extends BaseMWActivity {
 
     @Override
     protected void initViews() {
-
+        mFirsetTabbar = (TabbarItemLayout) findViewById(R.id.v_first_tab);
+        mSecondTabbar = (TabbarItemLayout) findViewById(R.id.v_second_tab);
+        mThirdTabbar = (TabbarItemLayout) findViewById(R.id.v_third_tab);
+        mFourthTabbar = (TabbarItemLayout) findViewById(R.id.v_fourth_tab);
     }
-
 
     public void onFirstTabClick(View v) {
         l("first");
@@ -100,6 +105,7 @@ public class MyWorldActivity extends BaseMWActivity {
         if (tabbar == mSelectedTabbar) {
             return;
         }
+        refreshTabbarStatus(tabbar);
         mSelectedTabbar = tabbar;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Iterator<Integer> iterator = mFragments.keySet().iterator();
@@ -120,5 +126,12 @@ public class MyWorldActivity extends BaseMWActivity {
             }
         }
         ft.commitAllowingStateLoss();
+    }
+
+    private void refreshTabbarStatus(int tabbar) {
+        mFirsetTabbar.setStatus(tabbar == TABBAR_FIRST ? true : false);
+        mSecondTabbar.setStatus(tabbar == TABBAR_SECOND ? true : false);
+        mThirdTabbar.setStatus(tabbar == TABBAR_THIRD ? true : false);
+        mFourthTabbar.setStatus(tabbar == TABBAR_FOURTH ? true : false);
     }
 }

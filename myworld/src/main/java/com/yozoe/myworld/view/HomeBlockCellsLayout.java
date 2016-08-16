@@ -79,6 +79,11 @@ public class HomeBlockCellsLayout extends HomeBaseLayout {
         }
     }
 
+    /**
+     * measureChildren measureChild
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 //        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -92,10 +97,9 @@ public class HomeBlockCellsLayout extends HomeBaseLayout {
 
             int cellWidthSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY);
             int cellHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.EXACTLY);
-            if(tag!=null && tag instanceof HomeConfigCell) {
+            if(tag != null && tag instanceof HomeConfigCell) {
                 HomeConfigCell cell = (HomeConfigCell)tag;
                 Rect rect = calcCellSize(cell);
-                // 创建测量参数
                 cellWidthSpec = MeasureSpec.makeMeasureSpec(rect.right-rect.left, MeasureSpec.EXACTLY);
                 cellHeightSpec = MeasureSpec.makeMeasureSpec(rect.bottom - rect.top, MeasureSpec.EXACTLY);
                 childView.measure(cellWidthSpec, cellHeightSpec);
