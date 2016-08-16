@@ -7,13 +7,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:paddingRight="4dp"
+        android:layout_centerHorizontal="true">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_tabbar"
+            android:src="@drawable/tab_first"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
@@ -21,7 +22,8 @@
     <TextView
         android:id="@+id/textView"
         android:layout_below="@id/layout_icon_tx"
-        android:text="testtesttest"
+        android:text="testtest"
+        android:textColor="#f00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>

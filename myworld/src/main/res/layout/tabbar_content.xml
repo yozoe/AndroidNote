@@ -7,7 +7,7 @@
         android:id="@+id/v_first_tab"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:onClick="onFirstTabClick"
         />
 
@@ -15,7 +15,7 @@
         android:id="@+id/v_second_tab"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:onClick="onSecondTabClick"
         />
 
@@ -23,7 +23,7 @@
         android:id="@+id/v_third_tab"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:onClick="onThirdTabClick"
         />
 
@@ -31,7 +31,7 @@
         android:id="@+id/v_fourth_tab"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:onClick="onFourthTabClick"
         />
 

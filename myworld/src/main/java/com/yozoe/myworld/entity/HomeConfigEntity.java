@@ -250,6 +250,142 @@ public class HomeConfigEntity implements Serializable {
         private String text;
         //半径
         private float radius;
+
+        public String getCellID() {
+            return cellID;
+        }
+
+        public void setCellID(String cellID) {
+            this.cellID = cellID;
+        }
+
+        public String getCellName() {
+            return cellName;
+        }
+
+        public void setCellName(String cellName) {
+            this.cellName = cellName;
+        }
+
+        public String getBackground() {
+            return background;
+        }
+
+        public void setBackground(String background) {
+            this.background = background;
+        }
+
+        public String getParams() {
+            return params;
+        }
+
+        public void setParams(String params) {
+            this.params = params;
+        }
+
+        public String getGotoTarget() {
+            return gotoTarget;
+        }
+
+        public void setGotoTarget(String gotoTarget) {
+            this.gotoTarget = gotoTarget;
+        }
+
+        public String getIntroduce() {
+            return introduce;
+        }
+
+        public void setIntroduce(String introduce) {
+            this.introduce = introduce;
+        }
+
+        public int getCellColumns() {
+            return cellColumns;
+        }
+
+        public void setCellColumns(int cellColumns) {
+            this.cellColumns = cellColumns;
+        }
+
+        public int getCellRows() {
+            return cellRows;
+        }
+
+        public void setCellRows(int cellRows) {
+            this.cellRows = cellRows;
+        }
+
+        public int getPositionX() {
+            return positionX;
+        }
+
+        public void setPositionX(int positionX) {
+            this.positionX = positionX;
+        }
+
+        public int getPositionY() {
+            return positionY;
+        }
+
+        public void setPositionY(int positionY) {
+            this.positionY = positionY;
+        }
+
+        public String getIcon() {
+            return icon;
+        }
+
+        public void setIcon(String icon) {
+            this.icon = icon;
+        }
+
+        public String getIconScaleType() {
+            return iconScaleType;
+        }
+
+        public void setIconScaleType(String iconScaleType) {
+            this.iconScaleType = iconScaleType;
+        }
+
+        public float getPositionXPer() {
+            return positionXPer;
+        }
+
+        public void setPositionXPer(float positionXPer) {
+            this.positionXPer = positionXPer;
+        }
+
+        public float getPositionYPer() {
+            return positionYPer;
+        }
+
+        public void setPositionYPer(float positionYPer) {
+            this.positionYPer = positionYPer;
+        }
+
+        public String getBackgroundColor() {
+            return backgroundColor;
+        }
+
+        public void setBackgroundColor(String backgroundColor) {
+            this.backgroundColor = backgroundColor;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public float getRadius() {
+            return radius;
+        }
+
+        public void setRadius(float radius) {
+            this.radius = radius;
+        }
     }
 
     public static class CarListBlock {

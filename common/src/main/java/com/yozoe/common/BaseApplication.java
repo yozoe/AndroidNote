@@ -13,4 +13,9 @@ public class BaseApplication extends Application {
         return mApplication;
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mApplication = this;
+    }
 }
