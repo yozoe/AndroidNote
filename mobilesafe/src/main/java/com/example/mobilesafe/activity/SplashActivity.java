@@ -240,6 +240,28 @@ public class SplashActivity extends Activity {
         //初始化数据
         initData();
         initAnimation();
+        initDB();
+    }
+
+    private void initDB() {
+        initAddressDB("address.db");
+    }
+
+    /**
+     * 拷贝数据库到files文件夹下
+     * @param s 数据库名称
+     */
+    private void initAddressDB(String dbName) {
+//        getFilesDir();
+//        getCacheDir();
+//        Environment.getExternalStorageDirectory().getAbsolutePath();
+
+        File files = getFilesDir();
+        File file = new File(files, dbName);
+        if (file.exists()) {
+            return;
+        }
+
     }
 
     /**
