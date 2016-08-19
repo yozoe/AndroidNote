@@ -1,9 +1,11 @@
-package com.example.test;
+package com.example.test.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
+
+import com.example.test.R;
 
 /**
  * Created by wangdong on 16/8/16.

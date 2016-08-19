@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.activity;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.test.receiver.DeviceAdmin;
+import com.example.test.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.receiver;
 
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;

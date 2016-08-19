@@ -8,11 +8,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
 
         </activity>
 
-        <activity android:name=".ViewStubTestActivity">
+        <activity android:name=".activity.ViewStubTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
         </activity>
         
         
-        <receiver android:name=".DeviceAdmin"
+        <receiver android:name=".receiver.DeviceAdmin"
             android:label="@string/sample_device_admin"
             android:description="@string/sample_device_admin_description"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
