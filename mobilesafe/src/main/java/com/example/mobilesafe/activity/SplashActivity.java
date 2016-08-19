@@ -32,6 +32,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -256,12 +257,40 @@ public class SplashActivity extends Activity {
 //        getCacheDir();
 //        Environment.getExternalStorageDirectory().getAbsolutePath();
 
+        //1.在files文件夹下创建同名dbName数据库文件过程
         File files = getFilesDir();
         File file = new File(files, dbName);
         if (file.exists()) {
             return;
         }
 
+        InputStream stream = null;
+        FileOutputStream fos = null;
+
+        //2.读取第三方资产目录下的文件
+        try {
+            stream = getAssets().open(dbName);
+            //3.将读取的内容写入到指定文件夹的文件中去
+            fos = new FileOutputStream(file);
+            //4.每次的读取内容大小
+            byte[] bs = new byte[1024];
+            int temp = -1;
+            while ((temp = stream.read(bs)) != -1) {
+                fos.write(bs, 0, temp);
+            }
+            Log.i("hehe", "写入完事");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null && fos != null) {
+                try {
+                    stream.close();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**

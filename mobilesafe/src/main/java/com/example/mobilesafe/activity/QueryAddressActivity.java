@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mobilesafe.R;
+import com.example.mobilesafe.engine.AddressDao;
 
 
 /**
@@ -25,5 +26,8 @@ public class QueryAddressActivity extends Activity {
         et_phone = (EditText) findViewById(R.id.et_phone);
         bt_query = (Button) findViewById(R.id.bt_query);
         tv_result = (TextView) findViewById(R.id.tv_result);
+
+        //测试代码,查询引擎类是否成功
+        AddressDao.getAddress("18612345678");
     }
 }
