@@ -3,6 +3,7 @@ package com.yozoe.itheima.youkumenu;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -39,20 +40,48 @@ public class YoukuMenuActivity extends Activity implements View.OnClickListener 
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     public void onClick(View v) {
+        if (AnimationUtils.runningAnimationCount > 0) {
+            return;
+        }
         switch (v.getId()) {
             case R.id.ib_home:
                 Log.i("hehe", "ib_home");
-                break;
-            case R.id.ib_menu:
-//                AnimationUtils.rotateOutAnim(rl_level1);
-                Log.i("hehe", "ib_menu");
-                if (isLevel3Display) {
+                if (isLevel2Display) {
 
+                    long delay = 0;
+
+                    if(isLevel3Display) {
+                        AnimationUtils.rotateOutAnim(rl_level3, 0);
+                        delay += 200;
+                        isLevel3Display = false;
+                    }
+
+                    AnimationUtils.rotateOutAnim(rl_level2, delay);
                 }
                 else {
-
+                    AnimationUtils.rotateInAnim(rl_level2, 0);
                 }
+                isLevel2Display = !isLevel2Display;
+                break;
+            case R.id.ib_menu:
+
+                Log.i("hehe", "ib_menu");
+                if (isLevel3Display) {
+                    AnimationUtils.rotateOutAnim(rl_level3, 0);
+                }
+                else {
+                    AnimationUtils.rotateInAnim(rl_level3, 0);
+                }
+                isLevel3Display = !isLevel3Display;
                 break;
         }
     }
