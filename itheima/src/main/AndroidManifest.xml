@@ -17,11 +17,15 @@
 
         </activity>
 
-        <activity android:name=".youkumenu.YoukuMenuActivity">
+        <activity android:name=".session04.YoukuMenuActivity">
 
         </activity>
 
-        <activity android:name=".carousel.CarouselActivity">
+        <activity android:name=".session04.CarouselActivity">
+
+        </activity>
+
+        <activity android:name=".session04.DropDownActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

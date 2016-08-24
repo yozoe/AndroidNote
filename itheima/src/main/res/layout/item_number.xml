@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="3dp"
+    android:gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants">
+
+    <!--
+     button或imageButton等自带按钮功能的控件会抢夺所在layout的焦点,导致其他区域点击不生效
+     beforeDescendants：viewgroup会优先其子类控件而获取到焦点
+     afterDescendants：viewgroup只有当其子类控件不需要获取焦点时才获取焦点
+     blocksDescendants：viewgroup会覆盖子类控件而直接获得焦点
+     -->
+
+    <ImageView
+        android:src="@drawable/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:text="12306"/>
+
+    <ImageButton
+        android:id="@+id/ib_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:background="@null"
+        android:padding="5dp"/>
+
+</LinearLayout>

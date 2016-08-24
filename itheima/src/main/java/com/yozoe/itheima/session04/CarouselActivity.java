@@ -1,4 +1,4 @@
-package com.yozoe.itheima.carousel;
+package com.yozoe.itheima.session04;
 
 import android.app.Activity;
 import android.os.Bundle;
