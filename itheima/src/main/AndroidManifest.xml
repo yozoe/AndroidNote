@@ -26,6 +26,10 @@
         </activity>
 
         <activity android:name=".session04.DropDownActivity">
+
+        </activity>
+
+        <activity android:name=".session04.ToggleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
