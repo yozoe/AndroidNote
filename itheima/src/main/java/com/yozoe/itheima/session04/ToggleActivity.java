@@ -2,6 +2,7 @@ package com.yozoe.itheima.session04;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.yozoe.itheima.R;
 import com.yozoe.itheima.session04.ui.ToggleView;
@@ -19,9 +20,17 @@ public class ToggleActivity extends Activity {
         setContentView(R.layout.activity_toggle);
 
         toggleView = (ToggleView) findViewById(R.id.toggleView);
-        toggleView.setSwitchBackgroundResource(R.drawable.switch_background);
-        toggleView.setSlideButtonResource(R.drawable.slide_button);
-        toggleView.setSwitchState(false);
+//        toggleView.setSwitchBackgroundResource(R.drawable.switch_background);
+//        toggleView.setSlideButtonResource(R.drawable.slide_button);
+//        toggleView.setSwitchState(false);
+
+        toggleView.setOnSwitchStateUpdateListener(new ToggleView.OnSwitchStateUpdateListener() {
+
+            @Override
+            public void onStateUpdate(boolean state) {
+                Toast.makeText(getApplicationContext(), "state: " + state, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

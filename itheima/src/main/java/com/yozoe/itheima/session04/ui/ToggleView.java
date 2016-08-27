@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -30,6 +31,9 @@ public class ToggleView extends View {
     private Bitmap slideButtonBitmap;   //滑块图片
     private Paint paint;
     private boolean mSwitchState = false; //开关状态,默认false
+    float currentX;
+    private OnSwitchStateUpdateListener onSwitchStateUpdateListener;
+
 
     /**
      * 用于代码创建控件
@@ -48,6 +52,14 @@ public class ToggleView extends View {
     public ToggleView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
+
+        String namespace = "http://schemas.android.com/apk/res-auto";
+        int switchBackgroundResource = attrs.getAttributeResourceValue(namespace, "switch_background", -1);
+        int slideButtonResource = attrs.getAttributeResourceValue(namespace, "slide_button", -1);
+
+        mSwitchState = attrs.getAttributeBooleanValue(namespace, "switch_state", false);
+        setSwitchBackgroundResource(switchBackgroundResource);
+        setSlideButtonResource(slideButtonResource);
 
     }
 
@@ -78,19 +90,70 @@ public class ToggleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //1.绘制背景 尽量不要在onDraw里面创建
-
-        if (mSwitchState) {
-            int newLeft = switchBackgroundBitmap.getWidth() - slideButtonBitmap.getWidth();
-            canvas.drawBitmap(slideButtonBitmap, newLeft, 0, paint);
-        }
-        else {
-            canvas.drawBitmap(slideButtonBitmap, 0, 0, paint);
-        }
-
         canvas.drawBitmap(switchBackgroundBitmap, 0, 0, paint);
 
         //2.绘制滑块
-        canvas.drawBitmap(slideButtonBitmap, 0, 0, paint);
+        if (isTouchMode) {
+            //根据当前用户触摸位置画
+            float newLeft = currentX - slideButtonBitmap.getWidth() / 2.0f;
+
+            int maxLeft = switchBackgroundBitmap.getWidth() - slideButtonBitmap.getWidth();
+
+            if (newLeft < 0) {
+                newLeft = 0;
+            }
+            else if (newLeft > maxLeft) {
+                newLeft = maxLeft;
+            }
+            canvas.drawBitmap(slideButtonBitmap, newLeft, 0, paint);
+        }
+        else {
+            if (mSwitchState) {
+                int newLeft = switchBackgroundBitmap.getWidth() - slideButtonBitmap.getWidth();
+                canvas.drawBitmap(slideButtonBitmap, newLeft, 0, paint);
+            }
+            else {
+                canvas.drawBitmap(slideButtonBitmap, 0, 0, paint);
+            }
+        }
+
+    }
+
+    boolean isTouchMode = false;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                isTouchMode = true;
+                currentX = event.getX();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                currentX = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                isTouchMode = false;
+                currentX = event.getX();
+
+                float center = switchBackgroundBitmap.getWidth() / 2.0f;
+
+                //根据当前按下的位置,和控件中心的位置进行比较
+                boolean state = currentX > center;
+
+                if (state != mSwitchState && onSwitchStateUpdateListener != null) {
+                    this.onSwitchStateUpdateListener.onStateUpdate(mSwitchState);
+                }
+
+
+                mSwitchState = state;
+                break;
+        }
+
+        //重绘页面
+        invalidate();   //会引发onDraw()被调用
+
+        return true;    //消费用户的触摸事件,才可以收到其他的事件
     }
 
     /**
@@ -115,5 +178,15 @@ public class ToggleView extends View {
      */
     public void setSwitchState(boolean mSwitchState) {
         this.mSwitchState = mSwitchState;
+    }
+
+    public void setOnSwitchStateUpdateListener(OnSwitchStateUpdateListener onSwitchStateUpdateListener) {
+        this.onSwitchStateUpdateListener = onSwitchStateUpdateListener;
+    }
+
+    public interface OnSwitchStateUpdateListener {
+
+        //状态回调
+        void onStateUpdate(boolean state);
     }
 }
