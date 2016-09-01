@@ -13,6 +13,14 @@
         </activity>
 
         <activity android:name=".activity.ViewStubTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.EventTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.TestTouchEvent1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

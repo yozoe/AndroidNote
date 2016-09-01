@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.yozoe.itheima.R;
+import com.yozoe.itheima.session04.ui.RefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +20,23 @@ import java.util.List;
  * Created by wangdong on 16/8/27.
  */
 public class RefreshListActivity extends Activity {
-    private ListView listView;
+    private RefreshListView listView;
     private List<String> listData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_refresh_list);
 
-        listView = (ListView) findViewById(R.id.listView);
+//        Button button = new Button(this);
+//        button.setText("我是按钮");
+
+        listView = (RefreshListView) findViewById(R.id.listView);
+
+//        listView.addHeaderView(button);
 
         listData = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
@@ -59,5 +69,6 @@ public class RefreshListActivity extends Activity {
             textView.setTextSize(18.f);
             return textView;
         }
+
     }
 }
