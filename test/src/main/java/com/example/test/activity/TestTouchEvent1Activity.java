@@ -8,7 +8,7 @@ import com.example.test.R;
 /**
  * Created by wangdong on 16/8/31.
  */
-public class TestTouchEvent1 extends Activity {
+public class TestTouchEvent1Activity extends Activity {
 
 
 
