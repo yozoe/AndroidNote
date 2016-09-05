@@ -25,6 +25,10 @@
         </activity>
 
         <activity android:name=".activity.AnimationTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.ViewAnimationTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
