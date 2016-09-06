@@ -13,21 +13,33 @@
 
             <Button
                 android:id="@+id/btn_object_animator"
-                android:text="alpha"
+                android:text="object animator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <!--<Button-->
-                <!--android:id="@+id/btn_rotate"-->
-                <!--android:text="rotate"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <Button
+                android:id="@+id/btn_wrapper_test"
+                android:text="wrapper test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            <!--<Button-->
-                <!--android:id="@+id/btn_translate"-->
-                <!--android:text="translate"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content" />-->
+            <Button
+                android:id="@+id/btn_holder"
+                android:text="holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_value_animator"
+                android:text="value animator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_animator_set"
+                android:text="animator set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <!--<Button-->
                 <!--android:id="@+id/btn_scale"-->

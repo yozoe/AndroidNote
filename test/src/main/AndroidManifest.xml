@@ -29,6 +29,10 @@
         </activity>
 
         <activity android:name=".activity.ViewAnimationTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.PropertyAnimationTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
