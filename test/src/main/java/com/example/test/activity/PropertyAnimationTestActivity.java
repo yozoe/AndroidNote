@@ -1,5 +1,7 @@
 package com.example.test.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -30,6 +32,8 @@ public class PropertyAnimationTestActivity extends Activity implements View.OnCl
         findViewById(R.id.btn_holder).setOnClickListener(this);
         findViewById(R.id.btn_value_animator).setOnClickListener(this);
         findViewById(R.id.btn_animator_set).setOnClickListener(this);
+        findViewById(R.id.btn_animator_xml).setOnClickListener(this);
+        findViewById(R.id.btn_view_animate).setOnClickListener(this);
     }
 
     @Override
@@ -49,7 +53,35 @@ public class PropertyAnimationTestActivity extends Activity implements View.OnCl
                 break;
             case R.id.btn_animator_set:
                 animatorSetTest();
+                break;
+            case R.id.btn_animator_xml:
+                animatorXmlTest();
+                break;
+            case R.id.btn_view_animate:
+                viewAnimateTest();
+                break;
         }
+    }
+
+    private void viewAnimateTest() {
+        testView.animate().alpha(0).y(300).setDuration(300).withStartAction(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("hehe", "什么叫with start");
+//                13691446871
+            }
+        }).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("hehe", "什么叫with end");
+            }
+        }).start();
+    }
+
+    private void animatorXmlTest() {
+        Animator anim = AnimatorInflater.loadAnimator(this, R.animator.scalex);
+        anim.setTarget(testView);
+        anim.start();
     }
 
     private void animatorSetTest() {
@@ -92,6 +124,7 @@ public class PropertyAnimationTestActivity extends Activity implements View.OnCl
         ObjectAnimator animator = new ObjectAnimator().ofFloat(testView, "translationX", 300);
         animator.setDuration(3000);
         animator.start();
+
     }
 
     private static class ViewWrapper {
