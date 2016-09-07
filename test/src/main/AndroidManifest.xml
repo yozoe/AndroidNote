@@ -33,6 +33,14 @@
         </activity>
 
         <activity android:name=".activity.PropertyAnimationTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.LayoutAnimationTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.DrawTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
