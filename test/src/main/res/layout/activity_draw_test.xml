@@ -9,8 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.example.test.view.DrawTestView
-        android:id="@+id/view_draw_test"
+    <!--<com.example.test.view.DrawTestView-->
+        <!--android:id="@+id/view_draw_test"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+    <com.example.test.view.LayerTestView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

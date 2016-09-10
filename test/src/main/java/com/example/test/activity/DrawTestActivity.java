@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.example.test.R;
 import com.example.test.view.DrawTestView;
+import com.example.test.view.LayerTestView;
 
 /**
  * Created by wangdong on 16/9/7.
@@ -14,6 +15,7 @@ import com.example.test.view.DrawTestView;
 public class DrawTestActivity extends Activity {
 
     private DrawTestView testDrawView;
+    private LayerTestView layerTestView;
     private Button testDrawButton;
 
     @Override
@@ -21,14 +23,14 @@ public class DrawTestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_test);
 
-        testDrawView = (DrawTestView) findViewById(R.id.view_draw_test);
+//        testDrawView = (DrawTestView) findViewById(R.id.view_draw_test);
         testDrawButton = (Button) findViewById(R.id.btn_draw);
 
-        testDrawButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                testDrawView.invalidate();
-            }
-        });
+//        testDrawButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                testDrawView.invalidate();
+//            }
+//        });
     }
 }
