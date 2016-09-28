@@ -45,6 +45,10 @@
         </activity>
 
         <activity android:name=".activity.RecyclerViewTestActivity">
+
+        </activity>
+
+        <activity android:name=".activity.ListViewTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
