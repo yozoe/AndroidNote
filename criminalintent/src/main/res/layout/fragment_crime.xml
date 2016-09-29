@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 使用主题属性引用,可将预定义的应用主题样式添加给指定组件。在fragment_crime.xml文 件中,样式属性值?android:listSeparatorTextViewStyle的使用就是个很好的例子。
+使用主题属性引用,就是告诉Android运行资源管理器:“在应用主题里找到名为 listSeparatorTextViewStyle的属性。该属性指向其他样式资源,请将其资源的值放在这里。”
+所有Android主题都包括名为listSeparatorTextViewStyle的属性。不过,基于特定主题 的整体风格,它们的定义稍有不同。使用主题属性引用,可以确保TextView组件在应用中拥有 正确一致的显示风格。  -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_title_label"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <EditText
+        android:id="@+id/crime_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/crime_title_hint"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_details_label"
+        style="?android:listSeparatorTextViewStyle"
+        />
+
+    <Button android:id="@+id/crime_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
+    <CheckBox android:id="@+id/crime_solved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/crime_solved_label"
+        />
+
+</LinearLayout>
